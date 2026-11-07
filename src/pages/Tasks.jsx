@@ -9,9 +9,26 @@ export default function Tasks() {
     const name = taskName.trim()
     if (!name) return
 
-    setTasks((currentTasks) => [...currentTasks, name])
-    setTaskName('')
+    setTasks((currentTasks) => [
+  ...currentTasks,
+  { id: crypto.randomUUID(), name, completed: false },
+])
+setTaskName('')
   }
+
+  function toggleTask(taskId) {
+  setTasks((currentTasks) =>
+    currentTasks.map((task) =>
+      task.id === taskId
+        ? { ...task, completed: !task.completed }
+        : task
+    )
+  )
+}
+
+
+
+
 
   return (
     <>
@@ -29,9 +46,18 @@ export default function Tasks() {
       </form>
 
       <ul>
-        {tasks.map((task, index) => (
-          <li key={`${task}-${index}`}>{task}</li>
-        ))}
+        {tasks.map((task) => (
+  <li key={task.id}>
+    <label>
+      <input
+        type="checkbox"
+        checked={task.completed}
+        onChange={() => toggleTask(task.id)}
+      />
+      {task.name}
+    </label>
+  </li>
+))}
       </ul>
     </>
   )
