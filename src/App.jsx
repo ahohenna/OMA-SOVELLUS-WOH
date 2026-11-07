@@ -1,9 +1,24 @@
+import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom'
+import Tasks from './pages/Tasks.jsx'
+import Calendar from './pages/Calendar.jsx'
+import Progress from './pages/Progress.jsx'
+
 function App() {
   return (
-    <main>
-      <h1>Hei maailma!</h1>
-      <p>Ensimmäinen React-sovellukseni.</p>
-    </main>
+    <BrowserRouter>
+      <nav>
+        <Link to="/tasks">Tasks</Link>{' | '}
+        <Link to="/calendar">Calendar</Link>{' | '}
+        <Link to="/progress">Progress</Link>
+      </nav>
+
+      <Routes>
+        <Route path="/" element={<Navigate to="/tasks" replace />} />
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/progress" element={<Progress />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
