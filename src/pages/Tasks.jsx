@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 export default function Tasks() {
   const [taskName, setTaskName] = useState('')
+  const [dueDate, setDueDate] = useState('')
   const [tasks, setTasks] = useState(() => {
   const savedTasks = localStorage.getItem('tasks')
   return savedTasks ? JSON.parse(savedTasks) : []
@@ -18,9 +19,10 @@ useEffect(() => {
 
     setTasks((currentTasks) => [
   ...currentTasks,
-  { id: crypto.randomUUID(), name, completed: false },
+  { id: crypto.randomUUID(), name, completed: false, dueDate },
 ])
 setTaskName('')
+setDueDate('')
   }
 
   function toggleTask(taskId) {
@@ -53,6 +55,13 @@ function deleteTask(taskId) {
           onChange={(event) => setTaskName(event.target.value)}
           placeholder="Write a task"
         />
+        <label htmlFor="task-due-date">Due date</label>
+        <input
+        id="task-due-date"
+        type="date"
+        value={dueDate}
+        onChange={(event) => setDueDate(event.target.value)}
+        />
         <button type="submit">Add</button>
       </form>
 
@@ -66,6 +75,7 @@ function deleteTask(taskId) {
         onChange={() => toggleTask(task.id)}
       />
       {task.name}
+      {task.dueDate && <span> — Due: {task.dueDate}</span>}
     </label>
     <button type="button" onClick={() => deleteTask(task.id)}>
         Delete
