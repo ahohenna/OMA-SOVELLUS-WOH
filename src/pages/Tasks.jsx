@@ -33,7 +33,11 @@ setTaskName('')
   )
 }
 
-
+function deleteTask(taskId) {
+  setTasks((currentTasks) =>
+    currentTasks.filter((task) => task.id !== taskId)
+  )
+}
 
 
 
@@ -63,6 +67,9 @@ setTaskName('')
       />
       {task.name}
     </label>
+    <button type="button" onClick={() => deleteTask(task.id)}>
+        Delete
+        </button>
   </li>
 ))}
       </ul>
