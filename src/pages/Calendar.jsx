@@ -1,4 +1,6 @@
+import { useState } from 'react'
 export default function Calendar() {
+  const [displayedMonth, setDisplayedMonth] = useState(() => new Date())
   const savedTasks = localStorage.getItem('tasks')
   const tasks = savedTasks ? JSON.parse(savedTasks) : []
 
@@ -9,6 +11,34 @@ export default function Calendar() {
   return (
     <main>
       <h1>Calendar</h1>
+      <button
+  type="button"
+  onClick={() =>
+    setDisplayedMonth(
+      new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() - 1, 1)
+    )
+  }
+>
+  Previous
+</button>
+
+<strong>
+  {displayedMonth.toLocaleDateString('en', {
+    month: 'long',
+    year: 'numeric',
+  })}
+</strong>
+
+<button
+  type="button"
+  onClick={() =>
+    setDisplayedMonth(
+      new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() + 1, 1)
+    )
+  }
+>
+  Next
+</button>
 
       {scheduledTasks.length === 0 ? (
         <p>No tasks with due dates yet.</p>
