@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 export default function Tasks() {
   const [taskName, setTaskName] = useState('')
   const [dueDate, setDueDate] = useState('')
+  const [sticker, setSticker] = useState('')
   const [tasks, setTasks] = useState(() => {
   const savedTasks = localStorage.getItem('tasks')
   return savedTasks ? JSON.parse(savedTasks) : []
@@ -19,10 +20,11 @@ useEffect(() => {
 
     setTasks((currentTasks) => [
   ...currentTasks,
-  { id: crypto.randomUUID(), name, completed: false, dueDate },
+  { id: crypto.randomUUID(), name, completed: false, dueDate, sticker },
 ])
 setTaskName('')
 setDueDate('')
+setSticker('')
   }
 
 function toggleTask(taskId) {
@@ -68,6 +70,18 @@ function deleteTask(taskId) {
         value={dueDate}
         onChange={(event) => setDueDate(event.target.value)}
         />
+        <label htmlFor="task-sticker">Sticker</label>
+        <select
+        id="task-sticker"
+        value={sticker}
+        onChange={(event) => setSticker(event.target.value)}
+    >
+        <option value="">No sticker</option>
+        <option value="/stickers/Star.svg">Star</option>
+</select>
+
+
+
         <button type="submit">Add</button>
       </form>
 
@@ -81,6 +95,9 @@ function deleteTask(taskId) {
         onChange={() => toggleTask(task.id)}
       />
       {task.name}
+      {task.sticker && (
+        <img src={task.sticker} alt="Star sticker" width="40" height="40" />
+        )}
       {task.dueDate && <span> — Due: {task.dueDate}</span>}
     </label>
     <button type="button" onClick={() => deleteTask(task.id)}>
