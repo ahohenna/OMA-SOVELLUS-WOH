@@ -25,11 +25,17 @@ setTaskName('')
 setDueDate('')
   }
 
-  function toggleTask(taskId) {
+function toggleTask(taskId) {
   setTasks((currentTasks) =>
     currentTasks.map((task) =>
       task.id === taskId
-        ? { ...task, completed: !task.completed }
+        ? {
+            ...task,
+            completed: !task.completed,
+            completedAt: task.completed
+              ? null
+              : new Date().toISOString(),
+          }
         : task
     )
   )
