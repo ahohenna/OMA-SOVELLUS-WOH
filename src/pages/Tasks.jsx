@@ -5,6 +5,10 @@ export default function Tasks() {
   const [taskName, setTaskName] = useState('')
   const [dueDate, setDueDate] = useState('')
   const [sticker, setSticker] = useState('')
+  const [placedStickers, setPlacedStickers] = useState(() => {
+  const savedStickers = localStorage.getItem('placedStickers')
+  return savedStickers ? JSON.parse(savedStickers) : []
+})
   const [tasks, setTasks] = useState(() => {
   const savedTasks = localStorage.getItem('tasks')
   return savedTasks ? JSON.parse(savedTasks) : []
@@ -13,6 +17,10 @@ export default function Tasks() {
 useEffect(() => {
   localStorage.setItem('tasks', JSON.stringify(tasks))
 }, [tasks])
+
+useEffect(() => {
+  localStorage.setItem('placedStickers', JSON.stringify(placedStickers))
+}, [placedStickers])
 
   function addTask(event) {
     event.preventDefault()
@@ -57,11 +65,35 @@ function deleteTask(taskId) {
     currentTasks.filter((task) => task.id !== taskId)
   )
 }
+function dropSticker(event) {
+  event.preventDefault()
 
+  const src = event.dataTransfer.getData('text/plain')
+  if (src !== '/stickers/Star.svg') return
+
+  const bounds = event.currentTarget.getBoundingClientRect()
+  const x = Math.max(
+    0,
+    Math.min(100, ((event.clientX - bounds.left - 32) / bounds.width) * 100)
+  )
+  const y = Math.max(
+    0,
+    Math.min(100, ((event.clientY - bounds.top - 32) / bounds.height) * 100)
+  )
+
+  setPlacedStickers((current) => [
+    ...current,
+    { id: crypto.randomUUID(), src, x, y },
+  ])
+}
 
 
   return (
-    <main className="tasks-page">
+    <main
+    className="tasks-page"
+    onDragOver={(event) => event.preventDefault()}
+    onDrop={dropSticker}
+>
       <h1>Tasks</h1>
 
       <form onSubmit={addTask}>
@@ -99,7 +131,16 @@ function deleteTask(taskId) {
             checked={sticker === '/stickers/Star.svg'}
             onChange={(event) => setSticker(event.target.value)}
         />
-        <img src="/stickers/Star.svg" alt="Star sticker" width="64" height="64" />
+        <img
+        src="/stickers/Star.svg"
+        alt="Star sticker"
+        width="64"
+        height="64"
+        draggable="true"
+        onDragStart={(event) =>
+            event.dataTransfer.setData('text/plain', '/stickers/Star.svg')
+        }
+    />
         </label>
     </fieldset>
         
@@ -129,19 +170,18 @@ function deleteTask(taskId) {
 ))}
       </ul>
       <div className="sticker-layer">
-  {tasks
-    .filter((task) => task.sticker)
-    .map((task) => (
-      <img
-        key={task.id}
-        src={task.sticker}
-        alt="Task sticker"
+        {placedStickers.map((placedSticker) => (
+        <img
+        key={placedSticker.id}
+        src={placedSticker.src}
+        alt="Placed sticker"
         style={{
-          left: `${task.stickerX}%`,
-          top: `${task.stickerY}%`,
+            left: `${placedSticker.x}%`,
+            top: `${placedSticker.y}%`,
         }}
-      />
-    ))}
+    />
+))}
+  
 </div>
     </main>
   )
