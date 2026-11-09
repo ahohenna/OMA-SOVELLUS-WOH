@@ -18,3 +18,16 @@
   height: 64px;
   object-fit: contain;
 }
+
+.sticker-picker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.sticker-picker img {
+  width: 64px;
+  height: 64px;
+  cursor: grab;
+}

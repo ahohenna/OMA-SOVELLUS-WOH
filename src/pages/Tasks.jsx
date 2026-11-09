@@ -111,45 +111,22 @@ function dropSticker(event) {
         value={dueDate}
         onChange={(event) => setDueDate(event.target.value)}
         />
-        <fieldset>
-            <legend>Choose a sticker</legend>
-            <label>
-                <input
-                type="radio"
-                name="sticker"
-                value=""
-                checked={sticker === ''}
-                onChange={(event) => setSticker(event.target.value)}
-            />
-            No sticker
-        </label>
-        <label>
-            <input
-            type="radio"
-            name="sticker"
-            value="/stickers/Star.svg"
-            checked={sticker === '/stickers/Star.svg'}
-            onChange={(event) => setSticker(event.target.value)}
-        />
+        
+        
+      <button type="submit">Add</button>
+      </form>
+      <section className="sticker-picker">
+        <h2>Stickers</h2>
+        
         <img
         src="/stickers/Star.svg"
-        alt="Star sticker"
-        width="64"
-        height="64"
+        alt="Drag star sticker onto the page"
         draggable="true"
         onDragStart={(event) =>
             event.dataTransfer.setData('text/plain', '/stickers/Star.svg')
         }
     />
-        </label>
-    </fieldset>
-        
-  
-
-
-
-        <button type="submit">Add</button>
-      </form>
+</section>
 
       <ul>
         {tasks.map((task) => (
