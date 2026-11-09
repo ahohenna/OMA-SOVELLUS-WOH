@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react'
 import './Tasks.css'
 
+const stickerFiles = [
+  'big_star.svg',
+  'boot.svg',
+  'no_idea.svg',
+  'sad_heart.svg',
+  'sparkle.svg',
+  'yeehaw.svg',
+  'star_og.svg',
+]
+
 export default function Tasks() {
   const [taskName, setTaskName] = useState('')
   const [dueDate, setDueDate] = useState('')
@@ -81,7 +91,7 @@ function dropSticker(event) {
   event.preventDefault()
 
   const src = event.dataTransfer.getData('text/plain')
-  if (src !== '/stickers/Star.svg') return
+  if (!stickerFiles.some((file) => src === `/stickers/${file}`)) return
 
   const bounds = event.currentTarget.getBoundingClientRect()
   const x = Math.max(
@@ -130,15 +140,21 @@ function dropSticker(event) {
       </form>
       <section className="sticker-picker">
         <h2>Stickers</h2>
+        {stickerFiles.map((file) => {
+            const src = `/stickers/${file}`
+            return (
+            <img
+            key={file}
+            src={src}
+            alt={`Sticker: ${file}`}
+            draggable="true"
+            onDragStart={(event) => {
+                event.dataTransfer.setData('text/plain', src)
+            }}
+        />
+    )
+})}
         
-        <img
-        src="/stickers/Star.svg"
-        alt="Drag star sticker onto the page"
-        draggable="true"
-        onDragStart={(event) =>
-            event.dataTransfer.setData('text/plain', '/stickers/Star.svg')
-        }
-    />
 </section>
 
       <ul>
