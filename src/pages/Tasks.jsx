@@ -70,15 +70,31 @@ function deleteTask(taskId) {
         value={dueDate}
         onChange={(event) => setDueDate(event.target.value)}
         />
-        <label htmlFor="task-sticker">Sticker</label>
-        <select
-        id="task-sticker"
-        value={sticker}
-        onChange={(event) => setSticker(event.target.value)}
-    >
-        <option value="">No sticker</option>
-        <option value="/stickers/Star.svg">Star</option>
-</select>
+        <fieldset>
+            <legend>Choose a sticker</legend>
+            <label>
+                <input
+                type="radio"
+                name="sticker"
+                value=""
+                checked={sticker === ''}
+                onChange={(event) => setSticker(event.target.value)}
+            />
+            No sticker
+        </label>
+        <label>
+            <input
+            type="radio"
+            name="sticker"
+            value="/stickers/Star.svg"
+            checked={sticker === '/stickers/Star.svg'}
+            onChange={(event) => setSticker(event.target.value)}
+        />
+        <img src="/stickers/Star.svg" alt="Star sticker" width="64" height="64" />
+        </label>
+    </fieldset>
+        
+  
 
 
 
