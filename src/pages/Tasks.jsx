@@ -112,6 +112,7 @@ function dropSticker(event) {
         <label htmlFor="task-name">New task</label>
         <input
           id="task-name"
+          maxLength={30}
           value={taskName}
           onChange={(event) => setTaskName(event.target.value)}
           placeholder="Write a task"

@@ -32,11 +32,12 @@
   cursor: grab;
 }
 
-
 .sticker-trash {
-  margin: 16px 0;
+  width: 300px;
+  margin: 168px auto 16px;
   padding: 16px;
   border: 2px dashed #999;
   border-radius: 8px;
   text-align: center;
+  box-sizing: border-box;
 }

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './Calendar.css'
 export default function Calendar() {
   const [displayedMonth, setDisplayedMonth] = useState(() => new Date())
   const savedTasks = localStorage.getItem('tasks')
@@ -78,7 +79,7 @@ function formatDate(date) {
     {scheduledTasks
     .filter((task) => task.dueDate === formatDate(day))
     .map((task) => (
-    <div key={task.id}>{task.name}</div>
+    <div className="calendar-task" key={task.id}>{task.name}</div>
   ))}
   </div>
 ))}
