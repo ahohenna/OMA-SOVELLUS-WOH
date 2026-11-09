@@ -31,3 +31,12 @@
   height: 64px;
   cursor: grab;
 }
+
+
+.sticker-trash {
+  margin: 16px 0;
+  padding: 16px;
+  border: 2px dashed #999;
+  border-radius: 8px;
+  text-align: center;
+}

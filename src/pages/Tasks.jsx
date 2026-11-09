@@ -65,6 +65,18 @@ function deleteTask(taskId) {
     currentTasks.filter((task) => task.id !== taskId)
   )
 }
+
+function removeSticker(event) {
+  event.preventDefault()
+  event.stopPropagation()
+
+  const stickerId = event.dataTransfer.getData('text/plain')
+
+  setPlacedStickers((current) =>
+    current.filter((sticker) => sticker.id !== stickerId)
+  )
+}
+
 function dropSticker(event) {
   event.preventDefault()
 
@@ -146,12 +158,27 @@ function dropSticker(event) {
   </li>
 ))}
       </ul>
+      <div
+      className="sticker-trash"
+      onDragOver={(event) => event.preventDefault()}
+      onDrop={removeSticker}
+    >
+    Drop a sticker here to remove it
+    </div>
+
+
+
+
       <div className="sticker-layer">
         {placedStickers.map((placedSticker) => (
         <img
         key={placedSticker.id}
         src={placedSticker.src}
         alt="Placed sticker"
+        draggable="true"
+        onDragStart={(event) =>
+            event.dataTransfer.setData('text/plain', placedSticker.id)
+        }
         style={{
             left: `${placedSticker.x}%`,
             top: `${placedSticker.y}%`,
