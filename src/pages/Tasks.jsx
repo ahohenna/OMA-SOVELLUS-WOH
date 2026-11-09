@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import './Tasks.css'
 
 export default function Tasks() {
   const [taskName, setTaskName] = useState('')
@@ -20,7 +21,15 @@ useEffect(() => {
 
     setTasks((currentTasks) => [
   ...currentTasks,
-  { id: crypto.randomUUID(), name, completed: false, dueDate, sticker },
+  {
+    id: crypto.randomUUID(),
+    name,
+    completed: false,
+    dueDate,
+    sticker,
+    stickerX: 10,
+    stickerY: 15,
+},
 ])
 setTaskName('')
 setDueDate('')
@@ -52,7 +61,7 @@ function deleteTask(taskId) {
 
 
   return (
-    <>
+    <main className="tasks-page">
       <h1>Tasks</h1>
 
       <form onSubmit={addTask}>
@@ -111,9 +120,6 @@ function deleteTask(taskId) {
         onChange={() => toggleTask(task.id)}
       />
       {task.name}
-      {task.sticker && (
-        <img src={task.sticker} alt="Star sticker" width="40" height="40" />
-        )}
       {task.dueDate && <span> — Due: {task.dueDate}</span>}
     </label>
     <button type="button" onClick={() => deleteTask(task.id)}>
@@ -122,6 +128,21 @@ function deleteTask(taskId) {
   </li>
 ))}
       </ul>
-    </>
+      <div className="sticker-layer">
+  {tasks
+    .filter((task) => task.sticker)
+    .map((task) => (
+      <img
+        key={task.id}
+        src={task.sticker}
+        alt="Task sticker"
+        style={{
+          left: `${task.stickerX}%`,
+          top: `${task.stickerY}%`,
+        }}
+      />
+    ))}
+</div>
+    </main>
   )
 }
