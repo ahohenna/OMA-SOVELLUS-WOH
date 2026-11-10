@@ -147,7 +147,7 @@ export default function Tasks() {
           Add
         </button>
       </form>
-      <section className="sticker-picker">
+      <section className="sticker-picker mb-5">
         <h2 className="w-100">Decorate your page with stickers</h2>
         {stickerFiles.map((file) => {
           const src = `/stickers/${file}`
@@ -172,9 +172,9 @@ export default function Tasks() {
             key={task.id}
             className="list-group-item d-flex justify-content-between align-items-center mb-2 rounded"
           >
-            <label>
+            <label className="flex-grow-1 text-center">
               <input
-                type="checkbox"
+              type="checkbox"
                 className="form-check-input me-2"
                 checked={task.completed}
                 onChange={() => toggleTask(task.id)}

@@ -81,7 +81,7 @@ export default function Progress() {
       {quoteError && <p role="alert">Mietelausetta ei voitu ladata: {quoteError}</p>}
       {!quote && !quoteError && <p>Ladataan mietelausetta...</p>}
       {quote && (
-        <div className="card mb-3">
+        <div className="card mb-3 bg-primary-subtle">
           <blockquote className="card-body">
             <p>“{quote.quote}”</p>
             {quote.author && <cite>— {quote.author}</cite>}
@@ -90,7 +90,7 @@ export default function Progress() {
       )}
       <div className="row g-3">
         <div className="col-md-6 order-2">
-          <div className="card h-100">
+          <div className="card h-100 bg-primary-subtle">
             <div className="card-body">
               <h2 className="card-title">Tasks completed</h2>
               <p>{completedTasks} / {totalTasks}</p>
@@ -99,7 +99,7 @@ export default function Progress() {
         </div>
 
         <div className="col-md-6 order-3">
-          <div className="card h-100">
+          <div className="card h-100 bg-primary-subtle">
             <div className="card-body">
               <h2 className="card-title">Progress</h2>
               <p>{percent}%</p>
@@ -121,7 +121,7 @@ export default function Progress() {
         </div>
 
         <div className="col-12 order-1">
-          <div className="card h-100">
+          <div className="card h-100 bg-primary-subtle">
             <div className="card-body">
               <div className="streak-stars" aria-hidden="true">
                 <img src="/stickers/big_star.svg" alt="" className="streak-star streak-star-small" />
