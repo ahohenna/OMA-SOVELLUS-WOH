@@ -160,6 +160,7 @@ code {
   --bs-btn-focus-shadow-rgb: 183, 179, 132;
 }
 
+
 .form-check-input:checked {
   background-color: #b7b384;
   border-color: #b7b384;
@@ -200,4 +201,13 @@ main > h1 {
 .tasks-page .form-control:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 1000px #f0efe2 inset !important;
   -webkit-text-fill-color: #000 !important;
+}
+
+
+.list-group-item {
+  border-color: #b7b384;
+}
+
+.list-group-item + .list-group-item {
+  border-top-width: 1px;
 }
