@@ -1,0 +1,55 @@
+.streak-stars {
+  position: relative;
+  width: 180px;
+  height: 80px;
+  margin: 0 auto 8px;
+}
+
+.streak-star {
+  position: absolute;
+  object-fit: contain;
+  animation: streak-float 2s ease-in-out infinite;
+}
+
+.streak-star-small {
+  width: 28px;
+  height: 28px;
+  left: 15px;
+  top: 30px;
+}
+
+.streak-star-large {
+  width: 64px;
+  height: 64px;
+  left: 58px;
+  top: 8px;
+}
+
+.streak-star-medium {
+  width: 42px;
+  height: 42px;
+  right: 12px;
+  top: 20px;
+}
+
+.streak-star-right {
+  left: auto;
+  right: 12px;
+}
+
+@keyframes streak-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .streak-star {
+    animation: none;
+  }
+}
