@@ -148,7 +148,7 @@ export default function Tasks() {
         </button>
       </form>
       <section className="sticker-picker">
-        <h2>Stickers</h2>
+        <h2 className="w-100">Decorate your page with stickers</h2>
         {stickerFiles.map((file) => {
           const src = `/stickers/${file}`
           return (
