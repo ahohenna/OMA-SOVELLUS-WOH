@@ -80,7 +80,7 @@ export default function Progress() {
       {quoteError && <p role="alert">Mietelausetta ei voitu ladata: {quoteError}</p>}
       {!quote && !quoteError && <p>Ladataan mietelausetta...</p>}
       {quote && (
-        <div className="card">
+        <div className="card mb-3">
           <blockquote className="card-body">
             <p>“{quote.quote}”</p>
             {quote.author && <cite>— {quote.author}</cite>}
@@ -88,7 +88,7 @@ export default function Progress() {
         </div>
       )}
       <div className="row g-3">
-        <div className="col-md-4">
+        <div className="col-md-6 order-2">
           <div className="card h-100">
             <div className="card-body">
               <h2 className="card-title">Tasks completed</h2>
@@ -97,7 +97,7 @@ export default function Progress() {
           </div>
         </div>
 
-        <div className="col-md-4">
+        <div className="col-md-6 order-3">
           <div className="card h-100">
             <div className="card-body">
               <h2 className="card-title">Progress</h2>
@@ -119,11 +119,12 @@ export default function Progress() {
           </div>
         </div>
 
-        <div className="col-md-4">
+        <div className="col-12 order-1">
           <div className="card h-100">
             <div className="card-body">
               <h2 className="card-title">Current streak</h2>
-              <p>{streak} days</p>
+              <p className="display-1 mb-0">{streak}</p>
+              <p className="fs-4">days</p>
             </div>
           </div>
         </div>

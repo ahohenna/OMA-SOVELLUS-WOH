@@ -143,7 +143,7 @@ export default function Tasks() {
     />
   </div>
 </div>
-        <button type="submit" className="btn btn-primary rounded-pill mt-3">
+        <button type="submit" className="btn btn-primary rounded-pill mt-3 mb-4">
           Add
         </button>
       </form>

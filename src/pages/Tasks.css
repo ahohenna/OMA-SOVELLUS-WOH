@@ -29,8 +29,8 @@
 }
 
 .sticker-picker img {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   cursor: grab;
 }
 
@@ -45,5 +45,9 @@
 }
 
 .sticker-picker h2 {
-  font-size: 12px;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
 }
