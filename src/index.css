@@ -169,3 +169,14 @@ code {
   border-color: #b7b384;
   box-shadow: 0 0 0 0.25rem rgba(183, 179, 132, 0.25);
 }
+
+.form-control {
+  background-color: #f0efe2;
+  border-color: #b7b384;
+}
+
+.form-control:focus {
+  background-color: #f0efe2;
+  border-color: #b7b384;
+  box-shadow: 0 0 0 0.25rem rgba(183, 179, 132, 0.25);
+}

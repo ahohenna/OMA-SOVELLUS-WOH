@@ -170,7 +170,7 @@ export default function Tasks() {
         {tasks.map((task) => (
           <li
             key={task.id}
-            className="list-group-item d-flex justify-content-between align-items-center mb-2 rounded"
+            className="list-group-item d-flex justify-content-between align-items-center mb-2 rounded bg-primary-subtle"
           >
             <label className="flex-grow-1 text-center">
               <input
