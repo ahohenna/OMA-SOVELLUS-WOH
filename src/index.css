@@ -124,7 +124,7 @@ code {
 }
 
 .btn-outline-primary {
-  --bs-btn-color: #716e4f;
+  --bs-btn-color: #000;
   --bs-btn-border-color: #b7b384;
   --bs-btn-hover-color: #212529;
   --bs-btn-hover-bg: #b7b384;
@@ -175,8 +175,29 @@ code {
   border-color: #b7b384;
 }
 
-.form-control:focus {
-  background-color: #f0efe2;
+.tasks-page .form-control:focus {
+  background-color: #f0efe2 !important;
   border-color: #b7b384;
   box-shadow: 0 0 0 0.25rem rgba(183, 179, 132, 0.25);
+}
+
+.form-control::placeholder {
+  color: #000;
+  opacity: 1;
+}
+
+.tasks-page form label {
+  color: #000;
+}
+
+main > h1 {
+  color: #000;
+}
+
+
+.tasks-page .form-control:-webkit-autofill,
+.tasks-page .form-control:-webkit-autofill:hover,
+.tasks-page .form-control:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #f0efe2 inset !important;
+  -webkit-text-fill-color: #000 !important;
 }
