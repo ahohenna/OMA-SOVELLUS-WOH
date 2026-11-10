@@ -136,7 +136,9 @@ function dropSticker(event) {
         />
         
         
-      <button type="submit">Add</button>
+      <button type="submit" className="btn btn-primary rounded-pill">
+        Add
+      </button>
       </form>
       <section className="sticker-picker">
         <h2>Stickers</h2>
@@ -169,9 +171,13 @@ function dropSticker(event) {
       {task.name}
       {task.dueDate && <span> — Due: {task.dueDate}</span>}
     </label>
-    <button type="button" onClick={() => deleteTask(task.id)}>
-        Delete
-        </button>
+    <button
+    type="button"
+    className="btn btn-danger rounded-pill"
+    onClick={() => deleteTask(task.id)}
+  >
+    Delete
+    </button>
   </li>
 ))}
       </ul>

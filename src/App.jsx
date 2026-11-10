@@ -6,10 +6,16 @@ import Progress from './pages/Progress.jsx'
 function App() {
   return (
     <BrowserRouter>
-      <nav>
-        <Link to="/tasks">Tasks</Link>{' | '}
-        <Link to="/calendar">Calendar</Link>{' | '}
-        <Link to="/progress">Progress</Link>
+      <nav className="d-flex justify-content-center gap-2 p-3">
+        <Link className="btn btn-outline-primary rounded-pill" to="/tasks">
+          Tasks
+        </Link>
+        <Link className="btn btn-outline-primary rounded-pill" to="/calendar">
+          Calendar
+        </Link>
+        <Link className="btn btn-outline-primary rounded-pill" to="/progress">
+          Progress
+        </Link>
       </nav>
 
       <Routes>
