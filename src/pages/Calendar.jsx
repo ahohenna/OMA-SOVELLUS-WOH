@@ -28,6 +28,7 @@ function formatDate(date) {
       <h1>Calendar</h1>
       <button
       type="button"
+      aria-label="Previous month"
       className="btn btn-outline-primary rounded-pill me-3"
       onClick={() =>
         setDisplayedMonth(
@@ -35,7 +36,7 @@ function formatDate(date) {
         )
       }
     >
-      Previous
+      ←
     </button>
 
 <strong>
@@ -47,6 +48,7 @@ function formatDate(date) {
 
 <button
   type="button"
+  aria-label="Next month"
   className="btn btn-outline-primary rounded-pill ms-3"
   onClick={() =>
     setDisplayedMonth(
@@ -54,7 +56,7 @@ function formatDate(date) {
     )
   }
 >
-  Next
+  →
 </button>
 
 
