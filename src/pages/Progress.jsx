@@ -1,34 +1,26 @@
 import { useEffect, useState } from 'react'
 export default function Progress() {
     const [quote, setQuote] = useState(null)
-  const [quoteError, setQuoteError] = useState('')
+    const [quoteError, setQuoteError] = useState('')
 
-  useEffect(() => {
+   useEffect(() => {
     let ignore = false
 
     async function loadQuote() {
       try {
-        const response = await fetch(
-          'https://cdn.jsdelivr.net/gh/GomezMig03/MotivationalAPI/en.json'
-        )
+        const response = await fetch('https://dummyjson.com/quotes/random')
 
         if (!response.ok) {
           throw new Error('API-pyyntö epäonnistui')
         }
 
-        const quotes = await response.json()
+        const quoteData = await response.json()
 
-        if (!Array.isArray(quotes) || quotes.length === 0) {
-          throw new Error('API ei palauttanut mietelauseita')
+        if (!quoteData.quote) {
+          throw new Error('API-vastauksesta puuttuu mietelause')
         }
 
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)]
-
-        if (!randomQuote.phrase) {
-          throw new Error('Mietelause puuttuu API-vastauksesta')
-        }
-
-        if (!ignore) setQuote(randomQuote)
+        if (!ignore) setQuote(quoteData)
       } catch (error) {
         if (!ignore) {
           setQuoteError(
@@ -43,7 +35,9 @@ export default function Progress() {
     return () => {
       ignore = true
     }
-  }, [])
+  }, []) 
+
+  
   const savedTasks = localStorage.getItem('tasks')
   const tasks = savedTasks ? JSON.parse(savedTasks) : []
 
@@ -87,7 +81,7 @@ while (completedDays.has(dateKey(streakDate))) {
       {!quote && !quoteError && <p>Ladataan mietelausetta...</p>}
       {quote && (
         <blockquote>
-          <p>“{quote.phrase}”</p>
+          <p>“{quote.quote}”</p>
           {quote.author && <cite>— {quote.author}</cite>}
         </blockquote>
       )}
