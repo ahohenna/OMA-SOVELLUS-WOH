@@ -27,15 +27,16 @@ function formatDate(date) {
     <main>
       <h1>Calendar</h1>
       <button
-  type="button"
-  onClick={() =>
-    setDisplayedMonth(
-      new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() - 1, 1)
-    )
-  }
->
-  Previous
-</button>
+      type="button"
+      className="btn btn-outline-primary rounded-pill me-3"
+      onClick={() =>
+        setDisplayedMonth(
+          new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() - 1, 1)
+        )
+      }
+    >
+      Previous
+    </button>
 
 <strong>
   {displayedMonth.toLocaleDateString('en', {
@@ -46,6 +47,7 @@ function formatDate(date) {
 
 <button
   type="button"
+  className="btn btn-outline-primary rounded-pill ms-3"
   onClick={() =>
     setDisplayedMonth(
       new Date(displayedMonth.getFullYear(), displayedMonth.getMonth() + 1, 1)
@@ -55,7 +57,10 @@ function formatDate(date) {
   Next
 </button>
 
+
+
 <div
+  className="mt-5"
   style={{
     display: 'grid',
     gridTemplateColumns: 'repeat(7, minmax(0, 1fr))',
@@ -68,10 +73,14 @@ function formatDate(date) {
   {calendarDays.map((day) => (
   <div
     key={formatDate(day)}
+    className={
+      formatDate(day) === formatDate(new Date())
+      ? 'border border-primary bg-primary-subtle'
+      : 'border'
+}
     style={{
       minHeight: '50px',
       padding: '6px',
-      border: '1px solid #ccc',
       opacity: day.getMonth() === month ? 1 : 0.45,
     }}
   >

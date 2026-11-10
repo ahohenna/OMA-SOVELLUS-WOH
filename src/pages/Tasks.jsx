@@ -16,21 +16,21 @@ export default function Tasks() {
   const [dueDate, setDueDate] = useState('')
   const [sticker, setSticker] = useState('')
   const [placedStickers, setPlacedStickers] = useState(() => {
-  const savedStickers = localStorage.getItem('placedStickers')
-  return savedStickers ? JSON.parse(savedStickers) : []
-})
+    const savedStickers = localStorage.getItem('placedStickers')
+    return savedStickers ? JSON.parse(savedStickers) : []
+  })
   const [tasks, setTasks] = useState(() => {
-  const savedTasks = localStorage.getItem('tasks')
-  return savedTasks ? JSON.parse(savedTasks) : []
-})
+    const savedTasks = localStorage.getItem('tasks')
+    return savedTasks ? JSON.parse(savedTasks) : []
+  })
 
-useEffect(() => {
-  localStorage.setItem('tasks', JSON.stringify(tasks))
-}, [tasks])
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
-useEffect(() => {
-  localStorage.setItem('placedStickers', JSON.stringify(placedStickers))
-}, [placedStickers])
+  useEffect(() => {
+    localStorage.setItem('placedStickers', JSON.stringify(placedStickers))
+  }, [placedStickers])
 
   function addTask(event) {
     event.preventDefault()
@@ -38,178 +38,189 @@ useEffect(() => {
     if (!name) return
 
     setTasks((currentTasks) => [
-  ...currentTasks,
-  {
-    id: crypto.randomUUID(),
-    name,
-    completed: false,
-    dueDate,
-    sticker,
-    stickerX: 10,
-    stickerY: 15,
-},
-])
-setTaskName('')
-setDueDate('')
-setSticker('')
+      ...currentTasks,
+      {
+        id: crypto.randomUUID(),
+        name,
+        completed: false,
+        dueDate,
+        sticker,
+        stickerX: 10,
+        stickerY: 15,
+      },
+    ])
+    setTaskName('')
+    setDueDate('')
+    setSticker('')
   }
 
-function toggleTask(taskId) {
-  setTasks((currentTasks) =>
-    currentTasks.map((task) =>
-      task.id === taskId
-        ? {
+  function toggleTask(taskId) {
+    setTasks((currentTasks) =>
+      currentTasks.map((task) =>
+        task.id === taskId
+          ? {
             ...task,
             completed: !task.completed,
             completedAt: task.completed
               ? null
               : new Date().toISOString(),
           }
-        : task
+          : task
+      )
     )
-  )
-}
+  }
 
-function deleteTask(taskId) {
-  setTasks((currentTasks) =>
-    currentTasks.filter((task) => task.id !== taskId)
-  )
-}
+  function deleteTask(taskId) {
+    setTasks((currentTasks) =>
+      currentTasks.filter((task) => task.id !== taskId)
+    )
+  }
 
-function removeSticker(event) {
-  event.preventDefault()
-  event.stopPropagation()
+  function removeSticker(event) {
+    event.preventDefault()
+    event.stopPropagation()
 
-  const stickerId = event.dataTransfer.getData('text/plain')
+    const stickerId = event.dataTransfer.getData('text/plain')
 
-  setPlacedStickers((current) =>
-    current.filter((sticker) => sticker.id !== stickerId)
-  )
-}
+    setPlacedStickers((current) =>
+      current.filter((sticker) => sticker.id !== stickerId)
+    )
+  }
 
-function dropSticker(event) {
-  event.preventDefault()
+  function dropSticker(event) {
+    event.preventDefault()
 
-  const src = event.dataTransfer.getData('text/plain')
-  if (!stickerFiles.some((file) => src === `/stickers/${file}`)) return
+    const src = event.dataTransfer.getData('text/plain')
+    if (!stickerFiles.some((file) => src === `/stickers/${file}`)) return
 
-  const bounds = event.currentTarget.getBoundingClientRect()
-  const x = Math.max(
-    0,
-    Math.min(100, ((event.clientX - bounds.left - 32) / bounds.width) * 100)
-  )
-  const y = Math.max(
-    0,
-    Math.min(100, ((event.clientY - bounds.top - 32) / bounds.height) * 100)
-  )
+    const bounds = event.currentTarget.getBoundingClientRect()
+    const x = Math.max(
+      0,
+      Math.min(100, ((event.clientX - bounds.left - 32) / bounds.width) * 100)
+    )
+    const y = Math.max(
+      0,
+      Math.min(100, ((event.clientY - bounds.top - 32) / bounds.height) * 100)
+    )
 
-  setPlacedStickers((current) => [
-    ...current,
-    { id: crypto.randomUUID(), src, x, y },
-  ])
-}
+    setPlacedStickers((current) => [
+      ...current,
+      { id: crypto.randomUUID(), src, x, y },
+    ])
+  }
 
 
   return (
     <main
-    className="tasks-page"
-    onDragOver={(event) => event.preventDefault()}
-    onDrop={dropSticker}
->
+      className="tasks-page"
+      onDragOver={(event) => event.preventDefault()}
+      onDrop={dropSticker}
+    >
       <h1>Tasks</h1>
 
-      <form onSubmit={addTask}>
-        <label htmlFor="task-name">New task</label>
-        <input
-          id="task-name"
-          maxLength={30}
-          value={taskName}
-          onChange={(event) => setTaskName(event.target.value)}
-          placeholder="Write a task"
-        />
-        <label htmlFor="task-due-date">Due date</label>
-        <input
-        id="task-due-date"
-        type="date"
-        value={dueDate}
-        onChange={(event) => setDueDate(event.target.value)}
-        />
-        
-        
-      <button type="submit" className="btn btn-primary rounded-pill">
-        Add
-      </button>
+      <form onSubmit={addTask} className="w-75 mx-auto">
+        <div className="row g-3">
+  <div className="col-md-6">
+    <label htmlFor="task-name">New task</label>
+    <input
+      id="task-name"
+      className="form-control"
+      maxLength={30}
+      value={taskName}
+      onChange={(event) => setTaskName(event.target.value)}
+      placeholder="Write a task"
+    />
+  </div>
+
+  <div className="col-md-6">
+    <label htmlFor="task-due-date">Due date</label>
+    <input
+      id="task-due-date"
+      className="form-control"
+      type="date"
+      value={dueDate}
+      onChange={(event) => setDueDate(event.target.value)}
+    />
+  </div>
+</div>
+        <button type="submit" className="btn btn-primary rounded-pill mt-3">
+          Add
+        </button>
       </form>
       <section className="sticker-picker">
         <h2>Stickers</h2>
         {stickerFiles.map((file) => {
-            const src = `/stickers/${file}`
-            return (
+          const src = `/stickers/${file}`
+          return (
             <img
-            key={file}
-            src={src}
-            alt={`Sticker: ${file}`}
-            draggable="true"
-            onDragStart={(event) => {
+              key={file}
+              src={src}
+              alt={`Sticker: ${file}`}
+              draggable="true"
+              onDragStart={(event) => {
                 event.dataTransfer.setData('text/plain', src)
-            }}
-        />
-    )
-})}
-        
-</section>
+              }}
+            />
+          )
+        })}
 
-      <ul>
+      </section>
+
+      <ul className="list-group w-75 mx-auto">
         {tasks.map((task) => (
-  <li key={task.id}>
-    <label>
-      <input
-        type="checkbox"
-        checked={task.completed}
-        onChange={() => toggleTask(task.id)}
-      />
-      {task.name}
-      {task.dueDate && <span> — Due: {task.dueDate}</span>}
-    </label>
-    <button
-    type="button"
-    className="btn btn-danger rounded-pill"
-    onClick={() => deleteTask(task.id)}
-  >
-    Delete
-    </button>
-  </li>
-))}
+          <li
+            key={task.id}
+            className="list-group-item d-flex justify-content-between align-items-center mb-2 rounded"
+          >
+            <label>
+              <input
+                type="checkbox"
+                className="form-check-input me-2"
+                checked={task.completed}
+                onChange={() => toggleTask(task.id)}
+              />
+              {task.name}
+              {task.dueDate && <span> — Due: {task.dueDate}</span>}
+            </label>
+            <button
+              type="button"
+              className="btn btn-danger rounded-pill"
+              onClick={() => deleteTask(task.id)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
       </ul>
       <div
-      className="sticker-trash"
-      onDragOver={(event) => event.preventDefault()}
-      onDrop={removeSticker}
-    >
-    Drop a sticker here to remove it
-    </div>
+        className="sticker-trash"
+        onDragOver={(event) => event.preventDefault()}
+        onDrop={removeSticker}
+      >
+        Drop a sticker here to remove it
+      </div>
 
 
 
 
       <div className="sticker-layer">
         {placedStickers.map((placedSticker) => (
-        <img
-        key={placedSticker.id}
-        src={placedSticker.src}
-        alt="Placed sticker"
-        draggable="true"
-        onDragStart={(event) =>
-            event.dataTransfer.setData('text/plain', placedSticker.id)
-        }
-        style={{
-            left: `${placedSticker.x}%`,
-            top: `${placedSticker.y}%`,
-        }}
-    />
-))}
-  
-</div>
+          <img
+            key={placedSticker.id}
+            src={placedSticker.src}
+            alt="Placed sticker"
+            draggable="true"
+            onDragStart={(event) =>
+              event.dataTransfer.setData('text/plain', placedSticker.id)
+            }
+            style={{
+              left: `${placedSticker.x}%`,
+              top: `${placedSticker.y}%`,
+            }}
+          />
+        ))}
+
+      </div>
     </main>
   )
 }

@@ -87,9 +87,47 @@ export default function Progress() {
           </blockquote>
         </div>
       )}
-      <p>Tasks completed: {completedTasks} / {totalTasks}</p>
-      <p>Progress: {percent}%</p>
-      <p>Current streak: {streak} days</p>
+      <div className="row g-3">
+        <div className="col-md-4">
+          <div className="card h-100">
+            <div className="card-body">
+              <h2 className="card-title">Tasks completed</h2>
+              <p>{completedTasks} / {totalTasks}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          <div className="card h-100">
+            <div className="card-body">
+              <h2 className="card-title">Progress</h2>
+              <p>{percent}%</p>
+              <div
+                className="progress"
+                role="progressbar"
+                aria-label="Task completion"
+                aria-valuenow={percent}
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div
+                  className="progress-bar"
+                  style={{ width: `${percent}%` }}
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          <div className="card h-100">
+            <div className="card-body">
+              <h2 className="card-title">Current streak</h2>
+              <p>{streak} days</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   )
 }
