@@ -94,14 +94,22 @@ export default function Tasks() {
     if (!stickerFiles.some((file) => src === `/stickers/${file}`)) return
 
     const bounds = event.currentTarget.getBoundingClientRect()
-    const x = Math.max(
+    const x =
+    (Math.max(
       0,
-      Math.min(100, ((event.clientX - bounds.left - 32) / bounds.width) * 100)
-    )
-    const y = Math.max(
-      0,
-      Math.min(100, ((event.clientY - bounds.top - 32) / bounds.height) * 100)
-    )
+      Math.min(bounds.width - 64, event.clientX - bounds.left - 32)
+  ) /
+  bounds.width) *
+  100
+
+const y =
+  (Math.max(
+    0,
+    Math.min(bounds.height - 64, event.clientY - bounds.top - 32)
+  ) /
+    bounds.height) *
+  100
+  
 
     setPlacedStickers((current) => [
       ...current,
