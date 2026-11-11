@@ -1,17 +1,27 @@
-# React + Vite
+# Task App
+A task management application built with React. The app is suitable for personal tasks and progress tracking.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
 
-Currently, two official plugins are available:
+- Add, delete and complete tasks
+- Task due dates and calendar view
+- Add and remove stickers
+- Track progress and task completion streaks
+- Display a random quote from the DummyJSON API
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Technologies
 
-## React Compiler
+- React and Vite
+- React Router
+- Bootstrap
+- DummyJSON Quotes API
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run Locally
 
-## Expanding the ESLint configuration
+1. Clone the project and navigate to its directory.
+2. Install the dependencies.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# OMA-SOVELLUS-WOH
+```bash
+npm install
+npm run dev
+```
