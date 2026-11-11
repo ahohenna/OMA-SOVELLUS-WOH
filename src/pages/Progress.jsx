@@ -79,7 +79,7 @@ export default function Progress() {
     <main className="container py-4">
       <h1>Progress</h1>
       {quoteError && <p role="alert">Mietelausetta ei voitu ladata: {quoteError}</p>}
-      {!quote && !quoteError && <p>Ladataan mietelausetta...</p>}
+      {!quote && !quoteError && <p role="status">Ladataan mietelausetta...</p>}
       {quote && (
         <div className="card mb-3 bg-primary-subtle">
           <blockquote className="card-body">

@@ -11,6 +11,17 @@ const stickerFiles = [
   'star_og.svg',
 ]
 
+const stickerDescriptions = {
+  'big_star.svg': 'Big star sticker',
+  'boot.svg': 'Cowboy boot sticker',
+  'no_idea.svg': 'I do not know text sticker',
+  'sad_heart.svg': 'Sad heart sticker',
+  'sparkle.svg': 'Sparkly sticker',
+  'yeehaw.svg': 'Yeehaw text sticker',
+  'star_og.svg': 'Happy star sticker',
+}
+
+
 export default function Tasks() {
   const [taskName, setTaskName] = useState('')
   const [dueDate, setDueDate] = useState('')
@@ -163,7 +174,7 @@ const y =
             <img
               key={file}
               src={src}
-              alt={`Sticker: ${file}`}
+              alt={stickerDescriptions[file]}
               draggable="true"
               onDragStart={(event) => {
                 event.dataTransfer.setData('text/plain', src)
@@ -193,6 +204,7 @@ const y =
             <button
               type="button"
               className="btn btn-danger rounded-pill"
+              aria-label={`Delete task: ${task.name}`}
               onClick={() => deleteTask(task.id)}
             >
               Delete
