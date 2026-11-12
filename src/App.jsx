@@ -1,11 +1,11 @@
-import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Link, Navigate, Route, Routes } from 'react-router-dom'
 import Tasks from './pages/Tasks.jsx'
 import Calendar from './pages/Calendar.jsx'
 import Progress from './pages/Progress.jsx'
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
     <nav className="d-flex justify-content-center gap-2 p-3">
       <Link className="btn btn-outline-primary rounded-pill" to="/tasks">
       Tasks
@@ -24,7 +24,7 @@ function App() {
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/progress" element={<Progress />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
