@@ -125,9 +125,9 @@ export default function Progress() {
           <div className="card h-100 bg-primary-subtle">
             <div className="card-body">
               <div className="streak-stars" aria-hidden="true">
-                <img src="/stickers/big_star.svg" alt="" className="streak-star streak-star-small" />
-                <img src="/stickers/big_star.svg" alt="" className="streak-star streak-star-large" />
-                <img src="/stickers/big_star.svg" alt="" className="streak-star streak-star-small streak-star-right" />
+                <img src={`${import.meta.env.BASE_URL}stickers/big_star.svg`} alt="" className="streak-star streak-star-small" />
+                <img src={`${import.meta.env.BASE_URL}stickers/big_star.svg`} alt="" className="streak-star streak-star-large" />
+                <img src={`${import.meta.env.BASE_URL}stickers/big_star.svg`} alt="" className="streak-star streak-star-small streak-star-right" />
               </div><h2 className="card-title">Current streak</h2><p className="display-1 mb-0">{streak}</p>
               <p className="fs-4">days</p>
             </div>

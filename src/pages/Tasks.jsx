@@ -21,6 +21,7 @@ const stickerDescriptions = {
   'star_og.svg': 'Happy star sticker',
 }
 
+const stickerPath = (file) => `${import.meta.env.BASE_URL}stickers/${file}`
 
 export default function Tasks() {
   const [taskName, setTaskName] = useState('')
@@ -28,7 +29,14 @@ export default function Tasks() {
   const [sticker, setSticker] = useState('')
   const [placedStickers, setPlacedStickers] = useState(() => {
     const savedStickers = localStorage.getItem('placedStickers')
-    return savedStickers ? JSON.parse(savedStickers) : []
+    return savedStickers
+      ? JSON.parse(savedStickers).map((placedSticker) => ({
+          ...placedSticker,
+          src: placedSticker.src.startsWith('/stickers/')
+            ? stickerPath(placedSticker.src.slice('/stickers/'.length))
+            : placedSticker.src,
+        }))
+      : []
   })
   const [tasks, setTasks] = useState(() => {
     const savedTasks = localStorage.getItem('tasks')
@@ -102,7 +110,7 @@ export default function Tasks() {
     event.preventDefault()
 
     const src = event.dataTransfer.getData('text/plain')
-    if (!stickerFiles.some((file) => src === `/stickers/${file}`)) return
+    if (!stickerFiles.some((file) => src === stickerPath(file))) return
 
     const bounds = event.currentTarget.getBoundingClientRect()
     const x =
@@ -169,7 +177,7 @@ const y =
       <section className="sticker-picker mb-5">
         <h2 className="w-100">Decorate your page with stickers</h2>
         {stickerFiles.map((file) => {
-          const src = `/stickers/${file}`
+          const src = stickerPath(file)
           return (
             <img
               key={file}
