@@ -12,20 +12,21 @@ export default function Progress() {
         const response = await fetch('https://dummyjson.com/quotes/random')
 
         if (!response.ok) {
-          throw new Error('API-pyyntö epäonnistui')
+          throw new Error('Quote API request failed')
         }
 
         const quoteData = await response.json()
 
         if (!quoteData.quote) {
-          throw new Error('API-vastauksesta puuttuu mietelause')
+          throw new Error('Quote is missing from the API response')
         }
 
         if (!ignore) setQuote(quoteData)
       } catch (error) {
         if (!ignore) {
+          console.error('Failed to load quote:', error)
           setQuoteError(
-            error instanceof Error ? error.message : 'Tuntematon virhe'
+            'Could not load a quote. Check your internet connection and try again later.'
           )
         }
       }
@@ -78,8 +79,8 @@ export default function Progress() {
   return (
     <main className="container py-4">
       <h1>Progress</h1>
-      {quoteError && <p role="alert">Mietelausetta ei voitu ladata: {quoteError}</p>}
-      {!quote && !quoteError && <p role="status">Ladataan mietelausetta...</p>}
+      {quoteError && <p role="alert">{quoteError}</p>}
+      {!quote && !quoteError && <p role="status">Loading a quote...</p>}
       {quote && (
         <div className="card mb-3 bg-primary-subtle">
           <blockquote className="card-body">

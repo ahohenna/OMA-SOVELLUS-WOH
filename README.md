@@ -18,6 +18,8 @@ A task management application built with React. The app is suitable for personal
 
 ## Run Locally
 
+Run these commands from the project root directory.
+
 1. Clone the project and navigate to its directory.
 2. Install the dependencies.
 
